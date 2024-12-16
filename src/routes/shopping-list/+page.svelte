@@ -2,6 +2,13 @@
   import { inventory, shoppingList } from "$lib/stores";
   import { onMount } from "svelte";
 
+  let newItem = {
+    item: "",
+    quantity: 1,
+    unit: "",
+    store: "Bevásárlólista",
+  };
+
   const updateShoppingList = () => {
     console.log("updateShoppingList függvény fut!");
     try {
@@ -12,6 +19,7 @@
         ...(inventoryData.cleaning || []).filter(item => item.quantity < 2),
         ...(inventoryData.foods || []).filter(item => item.quantity < 2),
         ...(inventoryData.household || []).filter(item => item.quantity < 2),
+        ...$shoppingList,
       ];
 
       console.log('Szűrt bevásárlólista:', filteredShoppingList);
@@ -22,9 +30,18 @@
     }
   };
 
-  onMount(() => {
-    updateShoppingList();
-  });
+  const addNewItem = () => {
+    if (!newItem.item || !newItem.unit) {
+      alert("Kérlek töltsd ki az összes mezőt!");
+      return;
+    }
+
+    shoppingList.update(currentList => {
+      return [...currentList, { ...newItem }];
+    });
+
+    newItem = { item: "", quantity: 1, unit: "", store: "Bevásárlólista" }; 
+  };
 
   const deleteShoppingItem = (index) => {
     shoppingList.update((currentList) => {
@@ -42,9 +59,11 @@
       }
       return updatedInventory;
     });
-
-    updateShoppingList();
   };
+
+    onMount(() => {
+    updateShoppingList();
+  });
 
   if (typeof window !== 'undefined') {
   window.updateShoppingList = updateShoppingList;
@@ -52,9 +71,45 @@
 
 </script>
 
-
-
 <h1>Bevásárlólista</h1>
+<div class= "new-item-form">
+  <h2>Új tétel hozzáadása</h2>
+  <form on:submit|preventDefault={addNewItem}>
+    <div class="form-group">
+      <label for="item">Tétel neve</label>
+      <input
+        id="item"
+        type="text"
+        bind:value={newItem.item}
+        placeholder=""
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="quantity">Mennyiség</label>
+      <input
+        id="quantity"
+        type="number"
+        min='1'
+        bind:value={newItem.quantity}
+        placeholder=""
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="unit">Mértékegység</label>
+      <input
+        id="unit"
+        type="text"
+        bind:value={newItem.unit}
+        placeholder=""
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Hozzáadás</button>
+  </form>
+</div>
+
 <button class="btn btn-primary mb-3" on:click={updateShoppingList}>Frissítés</button>
 
 {#if $shoppingList.length > 0}
@@ -108,6 +163,23 @@
   .table td {
     text-align: center;
   }
+  .new-item-form {
+    margin-bottom: 2rem;
+    text-align: center;
+ }
+ .form-group {
+  margin-bottom: 1rem;
+ }
+ .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+ }
+ .form-group input {
+  width: 25%;
+  padding: 0.5rem;
+  font-size: 1rem;
+ }
 </style>
 
 
