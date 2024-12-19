@@ -6,10 +6,10 @@
 <nav>
   <ul>
     <li><a href="/">Kezdőlap</a></li>
-    <li><a href="/cleaning">Tisztítószerek</a></li>
-    <li><a href="/foods">Élelmiszerek</a></li>
-    <li><a href="/household">Háztartási cikkek</a></li>
-    <li><a href="/shopping-list">Bevásárlólista</a></li>
+    <li><a href="/Svelte-kit/cleaning">Tisztítószerek</a></li>
+    <li><a href="/Svelte-kit/foods">Élelmiszerek</a></li>
+    <li><a href="/Svelte-kit/household">Háztartási cikkek</a></li>
+    <li><a href="/Svelte-kit/shopping-list">Bevásárlólista</a></li>
   </ul>
 </nav>
 

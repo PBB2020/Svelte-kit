@@ -43,7 +43,7 @@
           </p>
           <button
             class="btn btn-primary"
-            on:click={() => navigateTo("/shopping-list")}>Megnyitás</button>
+            on:click={() => navigateTo("/Svelte-kit/shopping-list")}>Megnyitás</button>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
             <p class="card-text">Kezeld az élelmiszer készleted!</p>
             <button
               class="btn btn-primary"
-              on:click={() => navigateTo("/foods")}>Megnyitás</button>
+              on:click={() => navigateTo("/Svelte-kit/foods")}>Megnyitás</button>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
           <p class="card-text">Kezeld a háztartási eszközök készletét!</p>
           <button
             class="btn btn-primary"
-            on:click={() => navigateTo("/household")}>Megnyitás</button>
+            on:click={() => navigateTo("/Svelte-kit/household")}>Megnyitás</button>
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@
           <p class="card-text">Kezeld a tisztítószer készleted!</p>
           <button
             class="btn btn-primary"
-            on:click={() => navigateTo("/cleaning")}>Megnyitás</button>
+            on:click={() => navigateTo("/Svelte-kit/cleaning")}>Megnyitás</button>
         </div>
       </div>
     </div>
