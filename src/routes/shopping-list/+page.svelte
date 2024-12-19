@@ -12,17 +12,21 @@
   const updateShoppingList = () => {
     console.log("updateShoppingList függvény fut!");
     try {
-      const inventoryData = $inventory || {cleaning: [], foods: [], household: []};
-      console.log('Aktuális inventoryData:', inventoryData);
+      const inventoryData = $inventory || {
+        cleaning: [],
+        foods: [],
+        household: [],
+      };
+      console.log("Aktuális inventoryData:", inventoryData);
 
       const filteredShoppingList = [
-        ...(inventoryData.cleaning || []).filter(item => item.quantity < 2),
-        ...(inventoryData.foods || []).filter(item => item.quantity < 2),
-        ...(inventoryData.household || []).filter(item => item.quantity < 2),
+        ...(inventoryData.cleaning || []).filter((item) => item.quantity < 2),
+        ...(inventoryData.foods || []).filter((item) => item.quantity < 2),
+        ...(inventoryData.household || []).filter((item) => item.quantity < 2),
         ...$shoppingList,
       ];
 
-      console.log('Szűrt bevásárlólista:', filteredShoppingList);
+      console.log("Szűrt bevásárlólista:", filteredShoppingList);
       shoppingList.set(filteredShoppingList);
     } catch (error) {
       console.error("Hiba a bevásárlólista frissítésekor:", error);
@@ -36,11 +40,11 @@
       return;
     }
 
-    shoppingList.update(currentList => {
+    shoppingList.update((currentList) => {
       return [...currentList, { ...newItem }];
     });
 
-    newItem = { item: "", quantity: 1, unit: "", store: "Bevásárlólista" }; 
+    newItem = { item: "", quantity: 1, unit: "", store: "Bevásárlólista" };
   };
 
   const deleteShoppingItem = (index) => {
@@ -61,18 +65,17 @@
     });
   };
 
-    onMount(() => {
+  onMount(() => {
     updateShoppingList();
   });
 
-  if (typeof window !== 'undefined') {
-  window.updateShoppingList = updateShoppingList;
-}
-
+  if (typeof window !== "undefined") {
+    window.updateShoppingList = updateShoppingList;
+  }
 </script>
 
 <h1>Bevásárlólista</h1>
-<div class= "new-item-form">
+<div class="new-item-form">
   <h2>Új tétel hozzáadása</h2>
   <form on:submit|preventDefault={addNewItem}>
     <div class="form-group">
@@ -90,7 +93,7 @@
       <input
         id="quantity"
         type="number"
-        min='1'
+        min="1"
         bind:value={newItem.quantity}
         placeholder=""
         required
@@ -110,7 +113,9 @@
   </form>
 </div>
 
-<button class="btn btn-primary mb-3" on:click={updateShoppingList}>Frissítés</button>
+<button class="btn btn-primary mb-3" on:click={updateShoppingList}
+  >Frissítés</button
+>
 
 {#if $shoppingList.length > 0}
   <table class="table table-bordered">
@@ -126,10 +131,10 @@
     <tbody>
       {#each $shoppingList as item, index}
         <tr>
-          <td>{item.item || 'N/A'}</td>
-          <td>{item.quantity || 'N/A'}</td>
-          <td>{item.unit || 'N/A'}</td>
-          <td>{item.store || 'N/A'}</td>
+          <td>{item.item || "N/A"}</td>
+          <td>{item.quantity || "N/A"}</td>
+          <td>{item.unit || "N/A"}</td>
+          <td>{item.store || "N/A"}</td>
           <td>
             <button
               class="btn btn-danger btn-sm"
@@ -166,20 +171,18 @@
   .new-item-form {
     margin-bottom: 2rem;
     text-align: center;
- }
- .form-group {
-  margin-bottom: 1rem;
- }
- .form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
- }
- .form-group input {
-  width: 25%;
-  padding: 0.5rem;
-  font-size: 1rem;
- }
+  }
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .form-group input {
+    width: 25%;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
 </style>
-
-
