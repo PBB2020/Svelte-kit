@@ -19,11 +19,30 @@
       };
       console.log("Aktuális inventoryData:", inventoryData);
 
+      const currentItems = new Set(
+        $shoppingList.map((item) => `${item.item}-${item.unit}-${item.store}`)
+      );
+
       const filteredShoppingList = [
-        ...(inventoryData.cleaning || []).filter((item) => item.quantity < 2),
-        ...(inventoryData.foods || []).filter((item) => item.quantity < 2),
-        ...(inventoryData.household || []).filter((item) => item.quantity < 2),
         ...$shoppingList,
+        ...(inventoryData.cleaning || [])
+          .filter((item) => item.quantity < 2)
+          .filter(
+            (item) =>
+              !currentItems.has(`${item.item}-${item.unit}-${item.store}`)
+          ),
+        ...(inventoryData.foods || [])
+          .filter((item) => item.quantity < 2)
+          .filter(
+            (item) =>
+              !currentItems.has(`${item.item}-${item.unit}-${item.store}`)
+          ),
+        ...(inventoryData.household || [])
+          .filter((item) => item.quantity < 2)
+          .filter(
+            (item) =>
+              !currentItems.has(`${item.item}-${item.unit}-${item.store}`)
+          ),
       ];
 
       console.log("Szűrt bevásárlólista:", filteredShoppingList);
