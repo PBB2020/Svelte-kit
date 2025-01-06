@@ -5,6 +5,7 @@
   let newItem = {
     item: "",
     quantity: 1,
+    desiredQuantity: 1,
     unit: "",
     store: "Bevásárlólista",
   };
@@ -74,6 +75,19 @@
     });
   };
 
+  const updateDesiredQuantity = (index) => {
+    shoppingList.update((currentList) => {
+      const updatedList = [...currentList];
+      if (updatedList[index]) {
+        updatedList[index].desiredQuantity = Math.max(
+          1,
+          updatedList[index].desiredQuantity || 1
+        );
+      }
+      return updatedList;
+    });
+  };
+
   const deleteInventoryItem = (category, index) => {
     inventory.update((curr) => {
       const updatedInventory = { ...curr };
@@ -135,7 +149,6 @@
 <button class="btn btn-primary mb-3" on:click={updateShoppingList}
   >Frissítés</button
 >
-
 {#if $shoppingList.length > 0}
   <table class="table table-bordered">
     <thead>
@@ -151,8 +164,15 @@
       {#each $shoppingList as item, index}
         <tr>
           <td>{item.item || "N/A"}</td>
-          <td>{item.quantity || "N/A"}</td>
-          <td>{item.unit || "N/A"}</td>
+          <td>
+            <input
+              type="number"
+              min="1"
+              bind:value={$shoppingList[index].desiredQuantity}
+              on:change={() => updateDesiredQuantity(index)}
+              style="width: 60 px; text-align: center;"
+            />
+          </td><td>{item.unit || "N/A"}</td>
           <td>{item.store || "N/A"}</td>
           <td>
             <button
