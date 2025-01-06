@@ -3,38 +3,4 @@
   <title>Készletnyilvántartó</title>
 </svelte:head>
 
-<nav>
-  <ul>
-    <li><a href="/">Kezdőlap</a></li>
-    <li><a href="/Svelte-kit/cleaning">Tisztítószerek</a></li>
-    <li><a href="/Svelte-kit/foods">Élelmiszerek</a></li>
-    <li><a href="/Svelte-kit/household">Háztartási cikkek</a></li>
-    <li><a href="/Svelte-kit/shopping-list">Bevásárlólista</a></li>
-  </ul>
-</nav>
-
 <slot />
-
-<style>
-  nav {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #ddd;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-  }
-  nav li {
-    text-decoration: none;
-    color: #007bff;
-  }
-  nav a:hover {
-    text-decoration: underline;
-    color: #0056b3;
-  }
-</style>
