@@ -104,6 +104,9 @@
 </footer>
 
 <style>
+  .container {
+    background-color: rgb(148, 149, 149);
+  }
   .card-title {
     font-size: 1.25rem;
     font-weight: bold;
@@ -118,5 +121,11 @@
   }
   .btn-danger:hover {
     background-color: #aa1010;
+  }
+  .col {
+    background-color: rgb(148, 149, 149);
+  }
+  .card-body {
+    background-color: rgb(194, 233, 245);
   }
 </style>

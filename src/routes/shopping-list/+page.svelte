@@ -7,6 +7,8 @@
     quantity: 1,
     desiredQuantity: 1,
     unit: "",
+    desiredUnit: "",
+    shop: "",
     store: "Bevásárlólista",
   };
 
@@ -88,6 +90,26 @@
     });
   };
 
+  const updateDesiredUnit = (index) => {
+    shoppingList.update((currentList) => {
+      const updatedList = [...currentList];
+      if (updatedList[index]) {
+        updatedList[index].desiredUnit = updatedList[index].desiredUnit || "";
+      }
+      return updatedList;
+    });
+  };
+
+  const updateShop = (index) => {
+    shoppingList.update((currentList) => {
+      const updatedList = [...currentList];
+      if(updatedList[index]) {
+        updatedList[index].shop = updatedList[index].shop || "";
+      }
+      return updatedList;
+    });
+  };
+
   const deleteInventoryItem = (category, index) => {
     inventory.update((curr) => {
       const updatedInventory = { ...curr };
@@ -142,6 +164,16 @@
         required
       />
     </div>
+    <div class="form-group">
+      <label for="shop">Bolt</label>
+      <input
+        id="shop"
+        type="text"
+        bind:value={newItem.shop}
+        placeholder=""
+        required
+      />
+    </div>
     <button type="submit" class="btn btn-primary">Hozzáadás</button>
   </form>
 </div>
@@ -156,7 +188,7 @@
         <th scope="col">Tétel neve</th>
         <th scope="col">Mennyiség</th>
         <th scope="col">Mértékegység</th>
-        <th scope="col">Készlet helye</th>
+        <th scope="col">Bolt</th>
         <th scope="col">Akciók</th>
       </tr>
     </thead>
@@ -172,8 +204,23 @@
               on:change={() => updateDesiredQuantity(index)}
               style="width: 60 px; text-align: center;"
             />
-          </td><td>{item.unit || "N/A"}</td>
-          <td>{item.store || "N/A"}</td>
+          </td>
+          <td>
+            <input
+              type="text"
+              bind:value={$shoppingList[index].desiredUnit}
+              on:change={() => updateDesiredUnit(index)}
+              style="width: 100 px; text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              bind:value={$shoppingList[index].shop}
+              on:change={() => updateShop(index)}
+              style="width: 150 px; text-align: center;"
+            />
+          </td>
           <td>
             <button
               class="btn btn-danger btn-sm"
@@ -206,8 +253,10 @@
   .table th,
   .table td {
     text-align: center;
+    background-color:rgb(194, 233, 245)
   }
   .new-item-form {
+    background-color: rgb(194, 233, 245);
     margin-bottom: 2rem;
     text-align: center;
   }
@@ -223,5 +272,8 @@
     width: 25%;
     padding: 0.5rem;
     font-size: 1rem;
+  }
+  h1 {
+    background-color: rgb(148, 149, 149);
   }
 </style>

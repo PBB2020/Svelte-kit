@@ -80,7 +80,7 @@
     <p style="color: red;">{errorMessage}</p>
   {/if}
   
-  <div>
+  <div id="element">
     <input bind:value={item} placeholder="Tétel neve" />
     <input type="number" bind:value={quantity} placeholder="Mennyiség" />
     <input bind:value={unit} placeholder="Mértékegység" />
@@ -134,5 +134,12 @@
     .table th,
     .table td {
       text-align: center;
+      background-color: rgb(194, 233, 245);
+    }
+    h1 {
+      background-color:rgb(148, 149, 149);
+    }
+    #element {
+      background-color:rgb(194, 233, 245);
     }
   </style>

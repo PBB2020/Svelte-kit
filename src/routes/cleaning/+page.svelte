@@ -5,8 +5,9 @@
   let storedValue = "Alapértelmezett érték";
 
   onMount(() => {
-    if(typeof localStorage !== "undefined") {
-      storedValue = localStorage.getItem("custom_key") || "Alapértelmezett érték";
+    if (typeof localStorage !== "undefined") {
+      storedValue =
+        localStorage.getItem("custom_key") || "Alapértelmezett érték";
     }
   });
 
@@ -16,18 +17,18 @@
         curr.cleaning = [];
         return curr;
       });
-      alert("A tisztítószer készlet sikeresen törölve!")
+      alert("A tisztítószer készlet sikeresen törölve!");
     } catch (error) {
       console.error("Hiba történt a tisztítószer készlet törlésekor", error);
       alert("Nem sikerült törölni a tisztítószer készletet.");
     }
   };
 
-  let item = '';
+  let item = "";
   let quantity = 0;
-  let unit = '';
-  let store = '';
-  let errorMessage = '';
+  let unit = "";
+  let store = "";
+  let errorMessage = "";
 
   const addItem = () => {
     if (!item) {
@@ -55,11 +56,11 @@
         curr.cleaning.push({ item, quantity, unit, store });
         return curr;
       });
-      item = '';
+      item = "";
       quantity = 0;
-      unit = '';
-      store = '';
-      errorMessage = '';
+      unit = "";
+      store = "";
+      errorMessage = "";
     } catch (error) {
       console.error("Hiba történt a tétel hozzáadásakor:", error);
       errorMessage = "Nem sikerült hozzáadni a tételt. Kérlek, próbáld újra.";
@@ -80,7 +81,7 @@
   <p style="color: red;">{errorMessage}</p>
 {/if}
 
-<div>
+<div id="element">
   <input bind:value={item} placeholder="Tétel neve" />
   <input type="number" bind:value={quantity} placeholder="Mennyiség" />
   <input bind:value={unit} placeholder="Mértékegység" />
@@ -107,7 +108,10 @@
         <td>{cleaning.unit}</td>
         <td>{cleaning.store}</td>
         <td>
-          <button class="btn btn-danger btn-sm" on:click={() => deleteItem(index)}>Törlés</button>
+          <button
+            class="btn btn-danger btn-sm"
+            on:click={() => deleteItem(index)}>Törlés</button
+          >
         </td>
       </tr>
     {/each}
@@ -134,8 +138,12 @@
   .table th,
   .table td {
     text-align: center;
+    background-color: rgb(194, 233, 245);
+  }
+  h1 {
+    background-color: rgb(148, 149, 149);
+  }
+  #element {
+    background-color: rgb(194, 233, 245);
   }
 </style>
-
-
-
